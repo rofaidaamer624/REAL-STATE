@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--Code By Webdevtrick ( https://webdevtrick.com )-->
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript To Do List | Webdevtrick.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+ 
+<div id="tasker" class="tasker">
+	<div id="error" class="error">Please Enter a Task</div>
+	<div id="todo-header" class="todo-header">
+		<input type="text" id="input-task" placeholder="Enter Your Task">
+		<button id="add-task"><i class="fa fa-fw fa-plus"></i>
+		</button>
+	</div>
+	<div class="todo-lists">
+		<ul id="tasks"></ul>
+	</div>
+</div>
+ 
+<script>
+  // Code By Webdevtrick ( https://webdevtrick.com )
+(function() {
+	'use strict';
+	var tasker = {
+		init: function() {
+			this.cacheDom();
+			this.bindEvents();
+			this.evalTasklist();
+		},
+		cacheDom: function() {
+			this.taskInput = document.getElementById("input-task");
+			this.addBtn = document.getElementById("add-task");
+			this.tasklist = document.getElementById("tasks");
+			this.tasklistChildren = this.tasklist.children;
+			this.errorMessage = document.getElementById("error");
+		},
+		bindEvents: function() {
+			this.addBtn.onclick = this.addTask.bind(this);
+			this.taskInput.onkeypress = this.enterKey.bind(this);
+		},
+		evalTasklist: function() {
+			var i, chkBox, delBtn;
+			for (i = 0; i < this.tasklistChildren.length; i += 1) {
+ 
+				chkBox = this.tasklistChildren[i].getElementsByTagName("input")[0];
+				chkBox.onclick = this.completeTask.bind(this, this.tasklistChildren[i], chkBox);
+ 
+				delBtn = this.tasklistChildren[i].getElementsByTagName("button")[0];
+				delBtn.onclick = this.delTask.bind(this, i);
+			}
+		},
+		render: function() {
+			var taskLi, taskChkbx, taskVal, taskBtn, taskTrsh;
+			taskLi = document.createElement("li");
+			taskLi.setAttribute("class", "task");
+			taskChkbx = document.createElement("input");
+			taskChkbx.setAttribute("type", "checkbox");
+			taskVal = document.createTextNode(this.taskInput.value);
+			taskBtn = document.createElement("button");
+			taskTrsh = document.createElement("i");
+			taskTrsh.setAttribute("class", "fa fa-trash");
+			taskBtn.appendChild(taskTrsh);
+ 
+			taskLi.appendChild(taskChkbx);
+			taskLi.appendChild(taskVal);
+			taskLi.appendChild(taskBtn);
+ 
+			this.tasklist.appendChild(taskLi);
+ 
+		},
+		completeTask: function(i, chkBox) {
+			if (chkBox.checked) {
+				i.className = "task completed";
+			} else {
+				this.incompleteTask(i);
+			}
+		},
+		incompleteTask: function(i) {
+			i.className = "task";
+		},
+		enterKey: function(event) {
+			if (event.keyCode === 13 || event.which === 13) {
+				this.addTask();
+			}
+		},
+		addTask: function() {
+			var value = this.taskInput.value;
+			this.errorMessage.style.display = "none";
+ 
+			if (value === "") {
+				this.error();
+			} else {
+				this.render();
+				this.taskInput.value = "";
+				this.evalTasklist();
+			}
+		},
+		delTask: function(i) {
+			this.tasklist.children[i].remove();
+			this.evalTasklist();
+		},
+		error: function() {
+			this.errorMessage.style.display = "block";
+		}
+	};
+ 
+	tasker.init();
+}());
+</script>
+ 
+</body>
+</html>

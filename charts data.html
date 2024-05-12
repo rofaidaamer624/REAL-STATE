@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+  <link rel="stylesheet" href="./css/hamburgers.css">  
+    <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="./css/all.css">
+</head>
+<body id="body">
+  <style>
+    canvas{
+      bottom: 0;
+      transform: translateY(50px);
+    }
+
+    .btn{
+    position:absolute;
+    width: 200px;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    height: 60px;
+    background-color: #000;
+    border-radius: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.5 );
+    text-decoration: none;
+    letter-spacing: 2px;
+    border-top: .5px solid rgba(255, 255, 255, 0.35);
+    border-left: .5px solid rgba(255, 255, 255, 0.35);
+    transition: .5s;
+    padding-left: 40px;
+}
+.btn:hover{
+    padding-left: 0;
+    padding-right: 40px;
+    transition: .5s;
+    color: white;
+}
+.btn span{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 5px;
+    background: #A3CFA7;
+    border-radius: 50%;
+    transition: .5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 1.5em;
+}
+.btn:hover span{
+    left: calc(100% - 55px);
+}
+  </style>
+      <div id="option-slider" class="option-slider">
+        <ul style="background-color: transpasrent; margin-top: 50px;" class="list-group  list-group-flush">
+          <li class="list-group-item active"><a href="./Home Project.html" class="hov-spa3 style">Home</a></li>
+          <li class="list-group-item"><a href="./about.html" class="hov-spa3">About</a></li>
+          <li class="list-group-item"><a href="./agent.html" class="hov-spa3">Agent</a></li>
+          <li class="list-group-item"><a href="./services.html" class="hov-spa3">Services</a></li>
+          <li class="list-group-item"><a href="./properties.html" class="hov-spa3">Properties</a></li>
+          <li class="list-group-item"><a href="./blog.html" class="hov-spa3">Blog</a></li>
+          <li class="list-group-item"><a href="./Log in.html" class="hov-spa3">Log-In</a></li>
+          <li class="list-group-item"><a href="./charts data.html" class="hov-spa3">Charts</a></li>
+          <li class="list-group-item">
+            <label class="switch">
+            <input onclick="darkMode()" type="checkbox">
+            <span id="slided" class="slider"></span>
+          </label>
+        </li>
+          <div onclick="slide()"  class="btn-cont">
+            <button style="cursor: pointer;" onclick="blurv()" class="sliderm"><i style="color: #fff;" class="fa-solid fa-gear"></i></button>
+          </div>
+        </ul>
+    </div>
+    <section class="cont-sec" id="blur-sec">
+      <a href="./Home Project.html" class="btn">Go Home<span><i class="fa-solid fa-arrow-right"></i></span></a>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<canvas id="bar-chart" width="800" height="300"></canvas>
+  </section>
+<script>
+new Chart(document.getElementById("bar-chart"), {
+    type: 'bar',
+    data: {
+      labels: ["Build a House(Company)", "UPTOWN (Our Company)", "Your Home(Company)", "Townen(Company)", "Colasek(Company)"],
+      datasets: [
+        {
+          label: "Paids",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: [2478,5267,734,784,433]
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Paids In Our Company and another Companies'
+      }
+    }
+});</script>
+  <script src="js/main.js"></script>
+  <script src="./css/all.js"></script>
+</body>
+</html>
